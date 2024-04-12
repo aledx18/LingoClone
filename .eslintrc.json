@@ -5,6 +5,7 @@
     "multiline-ternary": "off",
     "react/jsx-closing-bracket-location": "off",
     "react/jsx-curly-newline": "off",
-    "indent": "off"
+    "indent": "off",
+    "@next/next/no-img-element": "off"
   }
 }
