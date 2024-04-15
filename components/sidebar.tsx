@@ -15,7 +15,7 @@ export default function Sidebar({ className }: Props) {
         'h-full bg-gray-300 lg:w-[256px] left-0 top-0 border-r-2 px-4 lg:fixed flex flex-col',
         className
       )}>
-      <Link href='/learn'>
+      <Link href='/'>
         <div className='pt-8 pl-4 pb-7 flex items-center gap-x-3'>
           img
           <h1 className='text-2xl font-extrabold tracking-wide'>Lingo</h1>
