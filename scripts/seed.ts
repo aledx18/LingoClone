@@ -46,6 +46,64 @@ const main = async () => {
       }
     ])
 
+    await db.insert(schema.lessons).values([
+      {
+        id: 1,
+        unitId: 1,
+        title: 'Lesson 1',
+        order: 1
+      },
+      {
+        id: 2,
+        unitId: 1,
+        title: 'Lesson verbs',
+        order: 2
+      }
+    ])
+
+    await db.insert(schema.challenges).values([
+      {
+        id: 1,
+        lessonId: 1,
+        type: 'SELECT',
+        order: 1,
+        question: 'What is the Italian word for "hello"?'
+      },
+      {
+        id: 2,
+        lessonId: 2,
+        type: 'SELECT',
+        order: 2,
+        question: 'What is the Italian word for "goodbye"?'
+      }
+    ])
+
+    await db.insert(schema.challengeOptions).values([
+      {
+        id: 1,
+        challengeId: 1,
+        imageSrc: '/it.svg',
+        text: 'ciao',
+        correct: true,
+        audioSrc: '/it.mp3'
+      },
+      {
+        id: 2,
+        challengeId: 1,
+        imageSrc: '/fr.svg',
+        correct: false,
+        text: 'bonjour',
+        audioSrc: '/fr.mp3'
+      },
+      {
+        id: 3,
+        challengeId: 1,
+        imageSrc: '/sp.svg',
+        correct: false,
+        text: 'hola',
+        audioSrc: '/sp.mp3'
+      }
+    ])
     console.log('Seeding finished')
   } catch (error) {
     console.log(error)
