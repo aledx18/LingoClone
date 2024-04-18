@@ -23,23 +23,13 @@ const main = async () => {
         id: 1,
         title: 'Italian',
         imageSrc: '/it.svg'
-      },
-      {
-        id: 2,
-        title: 'French',
-        imageSrc: '/fr.svg'
-      },
-      {
-        id: 3,
-        title: 'Spanish',
-        imageSrc: '/sp.svg'
       }
     ])
 
     await db.insert(schema.units).values([
       {
         id: 1,
-        coursesId: 3,
+        coursesId: 1,
         title: 'Unit 1',
         description: 'Unit 1 description',
         order: 1
