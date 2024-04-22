@@ -5,6 +5,7 @@ import { Nunito_Sans } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import './globals.css'
 import { Toaster } from 'sonner'
+import ExitModal from '@/components/modals/exit-modal'
 
 const inter = Nunito_Sans({ subsets: ['latin'] })
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <html lang='en'>
         <body className={inter.className}>
           <Toaster />
+          <ExitModal />
           {children}
         </body>
       </html>
