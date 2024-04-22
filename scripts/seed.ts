@@ -33,6 +33,13 @@ const main = async () => {
         title: 'Unit 1',
         description: 'Unit 1 description',
         order: 1
+      },
+      {
+        id: 2,
+        coursesId: 1,
+        title: 'Unit 2',
+        description: 'Unit 2 description',
+        order: 2
       }
     ])
 
@@ -48,6 +55,12 @@ const main = async () => {
         unitId: 1,
         title: 'Lesson verbs',
         order: 2
+      },
+      {
+        id: 3,
+        unitId: 1,
+        title: 'Lesson 3',
+        order: 3
       }
     ])
 
