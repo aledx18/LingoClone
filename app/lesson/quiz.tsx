@@ -11,6 +11,7 @@ import { toast } from 'sonner'
 import { reduceHearts } from '@/actions/userProgress'
 import ResultCard from './resultCard'
 import { useRouter } from 'next/navigation'
+import { useHeartsModal } from '@/app/store/use-hearts-modal'
 
 type Props = {
   initialPercentage: number
@@ -30,6 +31,7 @@ export default function Quiz({
   initialLessonId,
   userSubscription
 }: Props) {
+  const { open: openHeartsModal } = useHeartsModal()
   const router = useRouter()
 
   const [pending, startTransition] = useTransition()
@@ -81,7 +83,7 @@ export default function Quiz({
         upsertChallengeProgress(challenge.id)
           .then((response) => {
             if (response?.error === 'hearts') {
-              console.log('miss hearts')
+              openHeartsModal()
               return
             }
             setStatus('correct')
@@ -98,7 +100,7 @@ export default function Quiz({
         reduceHearts(challenge.id)
           .then((response) => {
             if (response?.error === 'hearts') {
-              console.log('Miss hearts')
+              openHeartsModal()
               return
             }
             setStatus('wrong')
