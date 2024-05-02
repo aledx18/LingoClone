@@ -44,7 +44,7 @@ export default function Card({
           status === 'wrong' &&
           'border-rose-300 bg-red-100 hover:bg-rose-100',
         disabled && 'pointer-events-none hover:bg-white',
-        type === ' ASSIST' && 'lg:p-3 w-full'
+        type === 'ASSIST' && 'lg:p-3 w-full'
       )}>
       {imageSrc && (
         <div className='relative aspect-square mb-4 max-h-[80px] lg:max-h-[150px]'>
@@ -54,9 +54,9 @@ export default function Card({
       <div
         className={cn(
           'flex items-center justify-between',
-          type === ' ASSIST' && 'flex-row-reverse'
+          type === 'ASSIST' && 'flex-row-reverse'
         )}>
-        {type === ' ASSIST' && <div />}
+        {type === 'ASSIST' && <div />}
         <p
           className={cn(
             'text-neutral-600 text-sm lg:text-base',

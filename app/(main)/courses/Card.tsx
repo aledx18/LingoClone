@@ -35,7 +35,7 @@ export default function Card({
       <img
         src={imageSrc}
         alt={title}
-        className='rounded-lg drop-shadow-md border object-cover'
+        className='rounded-lg object-cover w-48'
       />
       <p className='text-center font-bold mt-3'>{title}</p>
     </div>

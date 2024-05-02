@@ -197,3 +197,39 @@ export const getLessonsPercentage = cache(async () => {
 
   return percentage
 })
+
+export const getUnitsPercentage = cache(async () => {
+  const userProgress = await getUserProgress()
+  const courseProgress = await getCoursesProgress()
+
+  const { userId } = auth()
+
+  if (!userProgress?.activeCourseId || !userId) {
+    return null
+  }
+  if (!courseProgress?.activeLessonId) {
+    return 0
+  }
+
+  const lesson = await getLesson(courseProgress.activeLessonId)
+
+  //   console.log('courseProgress', courseProgress.activeLesson)
+
+  if (!lesson) {
+    return 0
+  }
+
+  //   const completedChallenges = lesson.challenges.filter(
+  //     (challenge) => challenge.completed
+  //   )
+
+  //   const idUNi = 1
+
+  //   const dataLes = await db.query.lessons.findMany({
+  //     where: eq(lessons.unitId, idUNi)
+  //   })
+
+  //   const dataPro = await db.query.challengeProgress.findMany({})
+
+  // console.log('Cantidad de lesson unit 1 :', dataLes.length)
+})

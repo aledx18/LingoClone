@@ -1,12 +1,16 @@
-/* eslint-disable no-unused-vars */
 'use client'
 
 import { challenges, challengeOptions } from '@/db/schema'
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import Header from './header'
 import QuestionBubble from './questionBubble'
 import Challenge from './challenge'
 import Footer from './footer'
+import { upsertChallengeProgress } from '@/actions/challenge-progress'
+import { toast } from 'sonner'
+import { reduceHearts } from '@/actions/userProgress'
+import ResultCard from './resultCard'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   initialPercentage: number
@@ -26,6 +30,11 @@ export default function Quiz({
   initialLessonId,
   userSubscription
 }: Props) {
+  const router = useRouter()
+
+  const [pending, startTransition] = useTransition()
+
+  const [lessonId] = useState(initialLessonId)
   const [hearts, setHearts] = useState(initialHearts)
   const [percentage, setPercentage] = useState(initialPercentage)
   const [challenges] = useState(initialLessonChallenges)
@@ -37,17 +46,96 @@ export default function Quiz({
   })
   const [status, setStatus] = useState<'none' | 'correct' | 'wrong'>('none')
   const [selectedOption, setSelectedOption] = useState<number>()
+
+  const challenge = challenges[activeIndex]
+  const options = challenge?.challengeOptions ?? []
+
+  const onNext = () => {
+    setActiveIndex((current) => current + 1)
+  }
   const onSelect = (id: number) => {
     if (status !== 'none') return
 
     setSelectedOption(id)
   }
-  const challenge = challenges[activeIndex]
-  const options = challenge?.challengeOptions ?? []
+  const onContinue = () => {
+    if (!selectedOption) return
+
+    if (status === 'wrong') {
+      setStatus('none')
+      setSelectedOption(undefined)
+      return
+    }
+    if (status === 'correct') {
+      onNext()
+      setStatus('none')
+      setSelectedOption(undefined)
+      return
+    }
+    const correctOption = options.find((option) => option.correct)
+
+    if (!correctOption) return
+
+    if (correctOption.id === selectedOption) {
+      startTransition(() => {
+        upsertChallengeProgress(challenge.id)
+          .then((response) => {
+            if (response?.error === 'hearts') {
+              console.log('miss hearts')
+              return
+            }
+            setStatus('correct')
+            setPercentage((current) => current + 100 / challenges.length)
+
+            if (initialPercentage === 100) {
+              setHearts((current) => Math.min(current + 1, 5))
+            }
+          })
+          .catch(() => toast.error('Someth went wrong'))
+      })
+    } else {
+      startTransition(() => {
+        reduceHearts(challenge.id)
+          .then((response) => {
+            if (response?.error === 'hearts') {
+              console.log('Miss hearts')
+              return
+            }
+            setStatus('wrong')
+
+            if (!response?.error) {
+              setHearts((prev) => Math.max(prev - 1, 0))
+            }
+          })
+          .catch(() => toast.error('Someth went wrong'))
+      })
+    }
+  }
+
+  if (!challenge) {
+    return (
+      <>
+        <div className='flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full'>
+          <h1 className='text-xl lg:text-3xl font-bold'>Great job !</h1>
+          <div className='flex items-center gap-x-4 w-full'>
+            <ResultCard variant='points' value={challenges.length * 10} />
+            <ResultCard variant='hearts' value={hearts} />
+          </div>
+        </div>
+        <Footer
+          lessonId={lessonId}
+          status='completed'
+          onCheck={() => router.push('/learn')}
+        />
+      </>
+    )
+  }
+
   const title =
-    challenge.type === ' ASSIST'
+    challenge.type === 'ASSIST'
       ? 'Select the Correct meaning'
       : challenge.question
+
   return (
     <>
       <Header
@@ -62,7 +150,7 @@ export default function Quiz({
               {title}
             </h1>
             <div className=''>
-              {challenge.type === 'SELECT' && (
+              {challenge.type === 'ASSIST' && (
                 <QuestionBubble question={challenge.question} />
               )}
               <Challenge
@@ -70,14 +158,18 @@ export default function Quiz({
                 onSelect={onSelect}
                 status={status}
                 selectedOption={selectedOption}
-                disabled={false}
+                disabled={pending}
                 type={challenge.type}
               />
             </div>
           </div>
         </div>
       </div>
-      <Footer disabled={!selectedOption} status={status} onCheck={() => {}} />
+      <Footer
+        disabled={pending || !selectedOption}
+        status={status}
+        onCheck={onContinue}
+      />
     </>
   )
 }
