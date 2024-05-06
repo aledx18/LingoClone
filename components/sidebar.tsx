@@ -3,6 +3,7 @@ import Link from 'next/link'
 import SidebarItem from './SidebarItem'
 import { Loader } from 'lucide-react'
 import { ClerkLoaded, ClerkLoading, UserButton } from '@clerk/nextjs'
+import Image from 'next/image'
 
 type Props = {
   className?: string
@@ -17,8 +18,15 @@ export default function Sidebar({ className }: Props) {
       )}>
       <Link href='/'>
         <div className='pt-8 pl-4 pb-7 flex items-center gap-x-3'>
-          img
-          <h1 className='text-2xl font-extrabold tracking-wide'>Lingo</h1>
+          <Image
+            src='/home.svg'
+            width={30}
+            height={25}
+            alt='left_mouse_button_light'
+          />
+          <h1 className='text-2xl text-primary font-extrabold tracking-wide'>
+            PlayQuiz
+          </h1>
         </div>
       </Link>
       <div className='flex flex-col gap-y-2 flex-1'>

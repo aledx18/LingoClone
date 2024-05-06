@@ -17,6 +17,7 @@ export default function List({ activeCourseId, courses }: Props) {
   const [pending, startTransition] = useTransition()
 
   const onClick = (id: number) => {
+    console.log('click')
     if (pending) return
     if (id === activeCourseId) {
       return router.push('/learn')
@@ -36,6 +37,7 @@ export default function List({ activeCourseId, courses }: Props) {
           imageSrc={course.imageSrc}
           onClick={onClick}
           disabled={pending}
+          color={course.color}
           active={activeCourseId === course.id}
         />
       ))}

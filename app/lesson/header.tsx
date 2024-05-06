@@ -1,5 +1,5 @@
 import { Progress } from '@/components/ui/progress'
-import { X, InfinityIcon } from 'lucide-react'
+import { X, InfinityIcon, Heart } from 'lucide-react'
 import { useExitModal } from '../store/use-exit-modal'
 
 type Props = {
@@ -21,8 +21,8 @@ export default function Header({
         className='hover:opacity-55 transition cursor-pointer'
       />
       <Progress value={percentage} />
-      <div className='text-rose-400 flex items-center font-bold'>
-        <img src='/heart.svg' alt='heart' className='mr-2' />
+      <div className='text-rose-600 flex items-center font-bold'>
+        <Heart strokeWidth={3} className='mr-2 text-rose-600' />
         {hasActiveSubscription ? (
           <InfinityIcon className='h-6 w-6 stroke-[3]' />
         ) : (

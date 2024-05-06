@@ -24,7 +24,26 @@ const main = async () => {
       {
         id: 1,
         title: 'Games',
-        imageSrc: '/game.svg'
+        imageSrc: '/course-game.svg',
+        color: '#60a5fa'
+      },
+      {
+        id: 2,
+        title: 'Geography',
+        imageSrc: '/course-geo.svg',
+        color: '#4ade80'
+      },
+      {
+        id: 3,
+        title: 'Math',
+        imageSrc: '/course-math.svg',
+        color: '#fb7185'
+      },
+      {
+        id: 4,
+        title: 'Art',
+        imageSrc: '/course-art.svg',
+        color: '#f59e0b'
       }
     ])
 
@@ -76,7 +95,7 @@ const main = async () => {
       {
         id: 1,
         lessonId: 1,
-        type: 'ASSIST',
+        type: 'SELECT',
         order: 1,
         question: '¿En qué década se lanzó el video juego Super Mario Bros.?'
       },

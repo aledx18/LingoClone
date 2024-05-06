@@ -21,7 +21,13 @@ const buttonVariants = cva(
         colorMode:
           'bg-primary/15 border-2 border-b-4 active:border-b-2 border-primary/30 text-primary text-sm font-bold disabled:pointer-events-none disabled:opacity-50 tracking-wide',
         locked:
-          'bg-neutral-200 text-primary-foreground hover:bg-neutral-200/90 border-neutral-400 border-b-4 active:border-0'
+          'bg-neutral-200 text-primary-foreground hover:bg-neutral-200/90 border-neutral-400 border-b-4 active:border-0',
+        correctV:
+          'bg-green-200 border-2 border-b-4 active:border-b-2 border-green-500 text-green-700 text-sm font-bold disabled:pointer-events-none disabled:opacity-50 tracking-wide',
+        incorrectV:
+          'bg-rose-300 border-2 border-b-4 active:border-b-2 border-rose-500 text-rose-700 text-sm font-bold disabled:pointer-events-none disabled:opacity-50 tracking-wide',
+        shadowPrimary:
+          'bg-[#f9731625] text-primary hover:bg-primary hover:text-secondary shadow-sm'
       },
       size: {
         default: 'h-10 px-4 py-2',

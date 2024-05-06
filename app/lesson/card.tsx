@@ -35,14 +35,14 @@ export default function Card({
     <div
       onClick={hadleClick}
       className={cn(
-        'h-full border-2 rounded-xl border-b-4 hover:bg-black/5 p-4 lg:p-6 cursor-pointer active:border-b-2',
+        'h-full border-2 rounded-xl border-b-4 hover:bg-black/5 p-4 lg:p-6 cursor-pointer',
         selected && 'border-sky-300 bg-sky-100 hover:bg-sky-100',
         selected &&
           status === 'correct' &&
-          'border-orange-500 bg-orange-100 hover:bg-orange-50',
+          'border-green-500 bg-green-100 hover:bg-green-50',
         selected &&
           status === 'wrong' &&
-          'border-rose-300 bg-red-100 hover:bg-rose-100',
+          'border-rose-300 bg-red-100 hover:bg-rose-100 animate-pulse',
         disabled && 'pointer-events-none hover:bg-white',
         type === 'ASSIST' && 'lg:p-3 w-full'
       )}>
@@ -68,7 +68,12 @@ export default function Card({
         </p>
         <div
           className={cn(
-            'lg:w-[30px] lg:h-[30px] w-[20px] border-2 flex items-center justify-center rounded-lg text-neutral-400 lg:text-[15px] text-xs font-semibold'
+            'lg:w-[30px] lg:h-[30px] w-[20px] border-2 flex items-center justify-center rounded-lg text-neutral-400 lg:text-[15px] text-xs font-semibold',
+            selected && 'text-sky-500 border-sky-500',
+            selected &&
+              status === 'correct' &&
+              'text-green-500 border-green-500',
+            selected && status === 'wrong' && 'text-rose-500 border-rose-500'
           )}>
           {shortcut}
         </div>

@@ -42,9 +42,7 @@ export default function Header() {
               mode='modal'
               afterSignUpUrl='/learn'
               afterSignInUrl='/learn'>
-              <Button size='lg' variant='outline'>
-                Login
-              </Button>
+              <Button variant='shadowPrimary'>Login</Button>
             </SignInButton>
           </SignedOut>
         </ClerkLoaded>

@@ -13,7 +13,8 @@ import {
 export const courses = pgTable('courses', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
-  imageSrc: text('image_src').notNull()
+  imageSrc: text('image_src').notNull(),
+  color: text('color')
 })
 
 export const coursesRealtion = relations(courses, ({ many }) => ({

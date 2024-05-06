@@ -33,8 +33,11 @@ export default function ExitModal() {
         </DialogHeader>
         <DialogFooter className='mb-4'>
           <div className='flex flex-col gap-y-4 w-full'>
-            <Button onClick={close}>Keep learning</Button>
+            <Button variant='shadowPrimary' onClick={close}>
+              Keep learning
+            </Button>
             <Button
+              variant='outline'
               onClick={() => {
                 close()
                 router.push('/learn')

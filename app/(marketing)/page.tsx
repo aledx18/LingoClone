@@ -16,7 +16,7 @@ export default function Home() {
     <div className='max-w-[988px] justify-center p-4 gap-2 mx-auto flex-1 w-full flex flex-col lg:flex-row items-center'>
       <div className='relative w-[240px] h-[240px] lg:w-[424px] lg:h-[424px] lg:mb-0 mb-8'>
         <Image
-          className='rounded-2xl drop-shadow-xl'
+          className='rounded-2xl drop-shadow-2xl'
           src='/littleb.svg'
           alt='little-boy-learn'
           fill

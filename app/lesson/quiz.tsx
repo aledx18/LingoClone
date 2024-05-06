@@ -148,10 +148,17 @@ export default function Quiz({
       <div className='flex-1'>
         <div className='h-full flex items-center justify-center'>
           <div className='lg:min-h-[350px] lg:w-[600px] w-full px-6 lg:px-0 flex flex-col gap-y-12'>
-            <h1 className='text-lg lg:text-start font-bold lg:text-3xl text-center'>
-              {title}
-            </h1>
-            <div className=''>
+            <div className='bg-primary/15 border-primary border-2 border-b-8 border-r-8 rounded-3xl'>
+              <div className='border-t-8 border-l-4 border-b-2 border-r-2 rounded-tl-3xl rounded-tr-2xl rounded-bl-2xl rounded-br-2xl border-white px-6 pb-6 pt-2'>
+                <p className='py-3 font-bold text-md text-primary'>
+                  Question {activeIndex + 1}/{challenges.length}
+                </p>
+                <h1 className='text-lg lg:text-start font-bold lg:text-3xl text-center'>
+                  {title}
+                </h1>
+              </div>
+            </div>
+            <div>
               {challenge.type === 'ASSIST' && (
                 <QuestionBubble question={challenge.question} />
               )}

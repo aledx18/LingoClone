@@ -40,7 +40,13 @@ export default function Footer({ onCheck, status, disabled, lessonId }: Props) {
           disabled={disabled}
           className='ml-auto'
           onClick={onCheck}
-          variant={status === 'wrong' ? 'destructive' : 'colorMode'}>
+          variant={
+            status === 'wrong'
+              ? 'incorrectV'
+              : status === 'correct'
+              ? 'correctV'
+              : 'colorMode'
+          }>
           {status === 'none' && 'Check'}
           {status === 'correct' && 'Next'}
           {status === 'completed' && 'Continue'}
